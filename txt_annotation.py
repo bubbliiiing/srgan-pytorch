@@ -1,11 +1,12 @@
 import os
 
+#---------------------------------#
+#   指向数据集所在的文件夹
+#   默认指向根目录下的datasets
+#---------------------------------#
+datasets_path   = "datasets/"
+    
 if __name__ == "__main__":
-    #---------------------------------#
-    #   指向数据集所在的文件夹
-    #   默认指向根目录下的datasets
-    #---------------------------------#
-    datasets_path   = "datasets/"
     photos_names    = os.listdir(datasets_path)
     photos_names    = sorted(photos_names)
 
@@ -15,4 +16,3 @@ if __name__ == "__main__":
             list_file.write(os.path.join(os.path.abspath(datasets_path), photo_name))
             list_file.write('\n')
     list_file.close()
-
