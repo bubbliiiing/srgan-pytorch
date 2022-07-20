@@ -204,7 +204,6 @@ if __name__ == "__main__":
             D_model_train = torch.nn.parallel.DistributedDataParallel(D_model_train, device_ids=[local_rank], find_unused_parameters=True)
             
             VGG_feature_model = VGG_feature_model.cuda(local_rank)
-            VGG_feature_model = torch.nn.parallel.DistributedDataParallel(VGG_feature_model, device_ids=[local_rank], find_unused_parameters=True)
         else:
             cudnn.benchmark = True
             G_model_train = torch.nn.DataParallel(G_model)
