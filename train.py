@@ -13,7 +13,8 @@ from torchvision.models.vgg import vgg19
 from nets.srgan import Discriminator, Generator
 from utils.callbacks import LossHistory
 from utils.dataloader import SRGAN_dataset_collate, SRGANDataset
-from utils.utils import get_lr_scheduler, set_optimizer_lr, show_config
+from utils.utils import (download_weights, get_lr_scheduler, set_optimizer_lr,
+                         show_config)
 from utils.utils_fit import fit_one_epoch
 
 if __name__ == "__main__":
@@ -129,6 +130,13 @@ if __name__ == "__main__":
         device          = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         local_rank      = 0
 
+    if distributed:
+        if local_rank == 0:
+            download_weights()  
+        dist.barrier()
+    else:
+        download_weights()
+
     #---------------------------#
     #   生成网络和评价网络
     #---------------------------#
@@ -162,7 +170,7 @@ if __name__ == "__main__":
     #----------------------#
     #   获得损失函数
     #----------------------#
-    BCE_loss = nn.BCELoss()
+    BCE_loss = nn.BCEWithLogitsLoss()
     MSE_loss = nn.MSELoss()
     #----------------------#
     #   记录Loss

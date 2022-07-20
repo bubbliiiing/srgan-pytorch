@@ -105,3 +105,14 @@ def set_optimizer_lr(optimizer, lr_scheduler_func, epoch):
     lr = lr_scheduler_func(epoch)
     for param_group in optimizer.param_groups:
         param_group['lr'] = lr
+
+def download_weights():
+    import os
+    from torch.hub import load_state_dict_from_url
+    
+    download_urls = {
+        "vgg" : 'https://download.pytorch.org/models/vgg19-dcbb9e9d.pth',
+    }
+    url = download_urls["vgg"]
+    
+    load_state_dict_from_url(url)
