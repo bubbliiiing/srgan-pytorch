@@ -87,7 +87,7 @@ def fit_one_epoch(G_model_train, D_model_train, G_model, D_model, VGG_feature_mo
             #----------------------#
             #   反向传播
             #----------------------#
-            scaler.scale(D_real_loss).backward()
+            scaler.scale(D_fake_loss).backward()
             scaler.step(D_optimizer)
             scaler.update()
             
