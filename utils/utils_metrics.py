@@ -14,8 +14,8 @@ def create_window(window_size, channel=1):
     return window
 
 def SSIM(img1, img2, window_size=11, window=None, size_average=True, full=False):
-    img1 = (img1 * 0.5 + 0.5) * 255
-    img2 = (img2 * 0.5 + 0.5) * 255
+    img1 = (img1.float() * 0.5 + 0.5) * 255
+    img2 = (img2.float() * 0.5 + 0.5) * 255
     min_val = 0
     max_val = 255
     L = max_val - min_val
