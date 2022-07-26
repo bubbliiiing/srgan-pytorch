@@ -133,6 +133,8 @@ def fit_one_epoch(G_model_train, D_model_train, G_model, D_model, VGG_feature_mo
 
     G_total_loss = G_total_loss / epoch_step
     D_total_loss = D_total_loss / epoch_step
+    G_total_PSNR = G_total_PSNR / epoch_step
+    G_total_SSIM = G_total_SSIM / epoch_step
     
     if local_rank == 0:
         pbar.close()
